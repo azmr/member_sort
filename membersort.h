@@ -5,22 +5,69 @@
  *   - SIMD
  * - sorting parallel arrays
  * - reverse
+ * - generic & templated versions
  */
 #include <stdint.h>
 #include <string.h>
 
-int ms_cmp_int(void *a, void *b)
-{ return *(int *)a - *(int *)b; }
+#if 1  // COMPARISON FUNCTIONS
+int ms_cmp_int8(void const *a, void const *b) {
+    int A = *(int8_t const *)a,
+    	B = *(int8_t const *)b;
+	return (a > b) - (a < b);
+}
+int ms_cmp_uint8(void const *a, void const *b) {
+	uint8_t A = *(uint8_t const *)a,
+			B = *(uint8_t const *)b;
+	return (a > b) - (a < b);
+}
 
-int ms_cmp_unsigned(void *a, void *b)
-{ return *(unsigned *)a - *(unsigned *)b; }
+int ms_cmp_int16(void const *a, void const *b) {
+    int16_t A = *(int16_t const *)a,
+    	B = *(int16_t const *)b;
+	return (a > b) - (a < b);
+}
+int ms_cmp_uint16(void const *a, void const *b) {
+	uint16_t A = *(uint16_t const *)a,
+			 B = *(uint16_t const *)b;
+	return (a > b) - (a < b);
+}
 
-int ms_cmp_double(void *a, void *b)
-{ return (int)(*(double *)a - *(double *)b); }
-int ms_cmp_float(void *a, void *b)
-{ return (int)(*(float *)a - *(float *)b); }
+int ms_cmp_int32(void const *a, void const *b) {
+	int32_t A = *(int32_t const *)a,
+			B = *(int32_t const *)b;
+	return (a > b) - (a < b);
+}
+int ms_cmp_uint32(void const *a, void const *b) {
+	uint32_t A = *(uint32_t const *)a,
+			 B = *(uint32_t const *)b;
+	return (a > b) - (a < b);
+}
+
+int ms_cmp_int64(void const *a, void const *b) {
+	int64_t A = *(int64_t const *)a,
+			B = *(int64_t const *)b;
+	return (a > b) - (a < b);
+}
+int ms_cmp_uint64(void const *a, void const *b) {
+	uint64_t A = *(uint64_t const *)a,
+			 B = *(uint64_t const *)b;
+	return (a > b) - (a < b);
+}
+
+int ms_cmp_float(void const *a, void const *b) {
+	float A = *(float const *)a,
+		  B = *(float const *)b;
+	return (a > b) - (a < b);
+}
+int ms_cmp_double(void const *a, void const *b) {
+	double A = *(double const *)a,
+		   B = *(double const *)b;
+	return (a > b) - (a < b);
+}
 
 int (*ms_cmp_str)(void *a, void *b) = (int (*)(void*, void*)) strcmp;
+#endif // COMPARISON FUNCTIONS
 
 int
 ms_sort(void *array, void *first_member, size_t len, size_t member_size, int (* cmp_fn)(void *, void *))
