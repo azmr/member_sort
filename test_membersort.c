@@ -31,10 +31,10 @@ int main()
 	};
 	print_vals(vals, countof(vals));
 
-	ms_sort(vals, &vals[0].u, countof(vals), sizeof(vals[0]), ms_cmp_unsigned);
+	ms_sort(vals, &vals[0].u, countof(vals), sizeof(vals[0]), ms_cmp_uint32);
 	print_vals(vals, countof(vals));
 
-	ms_sort(vals, &vals[0].i, countof(vals), sizeof(vals[0]), ms_cmp_int);
+	ms_sort(vals, &vals[0].i, countof(vals), sizeof(vals[0]), ms_cmp_int32);
 	print_vals(vals, countof(vals));
 
 	ms_sort(vals, &vals[0].d, countof(vals), sizeof(vals[0]), ms_cmp_double);

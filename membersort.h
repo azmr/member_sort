@@ -179,6 +179,42 @@ ms_sort(void *array, void *first_comparand, size_t array_n, size_t member_size, 
 
 
 	// merge sorted runs
+	// in-place swap
+	// 1 3 5 2 4  > LEAVE
+	// ^     ^
+	// 1 3 5 2 4  > SWAP
+	//   ^   ^
+	// 1 2 5 3 4  > SWAP
+	//     ^ ^
+	// 1 2 3 5 4  > SWAP
+	//       ^ ^
+	// 1 2 3 4 5  > END
+	//         ^
+
+	// into new array
+	// - - - - -
+	// 1 3 5 2 4 > A
+	// ^     ^
+	//
+	// 1 - - - -
+	// 1 3 5 2 4 > B
+	//   ^   ^
+	//
+	// 1 2 - - -
+	// 1 3 5 2 4 > A
+	//   ^     ^
+	//
+	// 1 2 3 - -
+	// 1 3 5 2 4 > B
+	//     ^   ^
+	//
+	// 1 2 3 4 -
+	// 1 3 5 2 4 > A
+	//     ^
+	//
+	// 1 2 3 4 5
+	// 1 3 5 2 4
+
 	for (size_t merge_n = run_n; merge_n < array_n; merge_n *= 2)
 	{ // merge subarrays of doubling size
 		size_t merge_stride = merge_n * 2;
@@ -186,24 +222,25 @@ ms_sort(void *array, void *first_comparand, size_t array_n, size_t member_size, 
 		for (size_t left = 0; left < array_n; left += merge_stride)
 		{
 			size_t mid = left + merge_n - 1;
+
 		}
 	}
 }
 
 int
-ms_sortr(void *array, void *first_member, size_t len, size_t member_size, int (* cmp_fn)(void *, void *))
+ms_sortr(void *array, void *first_member, size_t array_n, size_t member_size, MSFnCmp *cmp_fn)
 {
 
 }
 
 int
-ms_sortp(void **arrays, size_t num_arrays, void *first_member, size_t len, size_t member_size, int (* cmp_fn)(void *, void *))
+ms_sortp(void **arrays, size_t num_arrays, void *first_member, size_t array_n, size_t member_size, MSFnCmp *cmp_fn)
 {
 
 }
 
 size_t
-ms_search(void *array, void *first_member, size_t len, size_t member_size, int (* cmp_fn)(void *, void *))
+ms_search(void *array, void *first_member, size_t array_n, size_t member_size, MSFnCmp *cmp_fn)
 {
 
 }
